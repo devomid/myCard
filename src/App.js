@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { Box, Typography } from '@mui/joy';
+import { useState } from 'react';
+import CompileModal from './compileModal';
 
 function App() {
+  const [compileModal, setCompileModal] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box sx={{ display: 'flex', height: '100vh', width: '100%', backgroundColor: 'rgb(0, 0, 159)', justifyContent: 'center', alignItems: 'center' }} >
+      <CompileModal />
+      <Box>
+        <Typography sx={{ color: 'rgb(179, 179, 179)' }} level='h1'>
+          Omid Azad
+        </Typography>
+      </Box>
+      <Box>
+        <Typography sx={{ color: 'rgb(179, 179, 179)' }} level='h1'>
+          Web Developer and Programmer
+        </Typography>
+      </Box>
+      <Box>
+        <Typography sx={{ color: 'rgb(179, 179, 179)' }} level='h1'>
+          Web Developer and Programmer
+        </Typography>
+      </Box>
+
+    </Box>
   );
 }
 
