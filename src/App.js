@@ -18,60 +18,77 @@ import { TypeAnimation } from 'react-type-animation';
 
 function App() {
   const [compileModal, setCompileModal] = useState(false);
+  const screenW = window.screen.width;
+  const screenH = window.screen.height;
+
+  console.log(screenH);
+  console.log(screenW);
 
   return (
-    <Box sx={{ display: 'flex', height: '100vh', width: '100%', backgroundColor: 'rgb(0, 0, 159)', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }} >
+    // <div className='App'>
+    <Box sx={{ backgroundColor: 'rgb(0, 0, 159)', width: `${screenW}px`, height: `${screenH}px`, justifyContent: 'center', alignItems: 'center' }} >
       <CompileModal open={compileModal} setOpen={setCompileModal} link={'omid'} />
 
-      <Box>
-        <Typography sx={{ color: 'rgb(179, 179, 179)' }} level='h1'>
-          Omid Azad
-        </Typography>
-      </Box>
 
-      <Box sx={{ backgroundColor: 'rgb(21, 148, 146)', border: '2px solid rgb(255, 255, 64)', width: '75%', height: '55%', borderRadius: 'xl', mb: 10, mt: 5, p: 5 }}>
-        <TypeAnimation sequence={['Omid @ webDev ~%', 1000, 'Omid @ devOmid ~%', 1000, `Omid @ Azad ~%`, 1000,]}
-          wrapper="span"
-          speed={50}
-          style={{ fontSize: '1.3em', display: 'inline-block', color: 'rgb(255, 255, 255)' }}
-          repeat={0}
-        />
-      </Box>
+      <Box sx={{ width: '100%', height: '100%', backgroundColor: 'red', justifyContent: 'center', alignItems: 'center' }}>
 
-      <Box sx={{ display: 'flex', flexDirection: 'row', width: '75%', justifyContent: 'space-evenly', alignItems: 'center' }}>
         <Box>
-          <IconButton onClick={() => setCompileModal(true)} >
-            <img src={linkedInOutline} />
-          </IconButton>
+          <Typography sx={{ color: 'rgb(179, 179, 179)' }} level='h1'>
+            Omid Azad
+          </Typography>
         </Box>
-        <Box>
-          <IconButton onClick={() => setCompileModal(true)} >
-            <img src={instaOutline} />
-          </IconButton>
+
+        <Box sx={{ backgroundColor: 'rgb(21, 148, 146)', border: '2px solid rgb(255, 255, 64)', width: '75%', height: '55%', borderRadius: 'xl', mb: 10, mt: 5 }}>
+          <TypeAnimation sequence={['Omid @ webDev ~%', 1000, 'Omid @ devOmid ~%', 1000, `Omid @ Azad ~%`, 1000,]}
+            wrapper="span"
+            speed={50}
+            style={{ fontSize: '1.3em', display: 'inline-block', color: 'rgb(255, 255, 255)' }}
+            repeat={0}
+          />
         </Box>
-        <Box>
-          <IconButton onClick={() => setCompileModal(true)} >
-            <img src={telegramOutline} />
-          </IconButton>
-        </Box>
-        <Box>
-          <IconButton onClick={() => setCompileModal(true)} >
-            <img src={githubOutline} />
-          </IconButton>
-        </Box>
-        <Box>
-          <IconButton onClick={() => setCompileModal(true)} >
-            <img src={gmailOutline} />
-          </IconButton>
-        </Box>
-        <Box>
-          <IconButton onClick={() => setCompileModal(true)} >
-            <img src={phoneOutline} />
-          </IconButton>
+
+        <Box sx={{ display: 'flex', flexDirection: 'row', width: '95%', justifyContent: 'center', alignItems: 'center' }}>
+
+          <Box sx={{ width: '17%' }}>
+            <IconButton onClick={() => setCompileModal(true)} >
+              <img width={screenW / 7} src={linkedInOutline} />
+            </IconButton>
+          </Box>
+
+          <Box sx={{ width: '17%' }}>
+            <IconButton onClick={() => setCompileModal(true)} >
+              <img width={screenW / 7} src={instaOutline} />
+            </IconButton>
+          </Box>
+
+          <Box sx={{ width: '17%' }}>
+            <IconButton onClick={() => setCompileModal(true)} >
+              <img width={screenW / 7} src={telegramOutline} />
+            </IconButton>
+          </Box>
+
+          <Box sx={{ width: '17%' }}>
+            <IconButton onClick={() => setCompileModal(true)} >
+              <img width={screenW / 7} src={githubOutline} />
+            </IconButton>
+          </Box>
+
+          <Box sx={{ width: '17%' }}>
+            <IconButton onClick={() => setCompileModal(true)} >
+              <img width={screenW / 7} src={gmailOutline} />
+            </IconButton>
+          </Box>
+
+          <Box sx={{ width: '17%' }}>
+            <IconButton onClick={() => setCompileModal(true)} >
+              <img width={screenW / 7} src={phoneOutline} />
+            </IconButton>
+          </Box>
+
         </Box>
       </Box>
-
     </Box >
+    // </div>
   );
 }
 
