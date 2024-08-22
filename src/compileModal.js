@@ -9,8 +9,8 @@ const CompileModal = ({ open, setOpen, link }) => {
     return (
         <Box>
             <Modal sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', p: 1 }} open={open} onClose={() => setOpen(false)}  >
-                <Sheet sx={{ width: '30%', height: '18%', boxShadow: 'lg', backgroundColor: 'rgb(155, 155, 155)', display: 'flex', justifyContent: 'center', alignItems: 'center', p: 0.8 }} variant="outlined" >
-                    <Box sx={{ backgroundColor: 'rgb(155, 155, 155)', border: '2px solid white', height: '96%', width: '99%', display: 'flex', justifyContent: 'center', alignItems: 'center', m: '2px', flexDirection: 'column' }}>
+                <Sheet sx={{ width: '30%', height: '18%', boxShadow: 'lg', backgroundColor: 'rgb(21, 148, 146)', display: 'flex', justifyContent: 'center', alignItems: 'center', p: 0.8 }} variant="outlined" >
+                    <Box sx={{ backgroundColor: 'rgb(21, 148, 146)', border: '2px solid white', height: '96%', width: '99%', display: 'flex', justifyContent: 'center', alignItems: 'center', m: '2px', flexDirection: 'column' }}>
                         <Typography sx={{ position: 'absolute', top: 1, color: 'grey', backgroundColor: 'white', p: 0.3 }}>
                             <TypeAnimation sequence={['Are you sure?', 1000]} speed={35} repeat={0} cursor={false} style={{ color: 'rgb(158, 68, 4)' }} />
                         </Typography>
