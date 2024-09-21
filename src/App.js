@@ -8,11 +8,8 @@ import icons from './constants/icons';
 
 function App() {
   const [compileModal, setCompileModal] = useState(false);
-  const screenW = window.screen.width;
-  const screenH = window.screen.height;
-
-  console.log(screenH);
-  console.log(screenW);
+  const screenW = document.documentElement.clientWidth;
+  const screenH = document.documentElement.clientHeight;
 
   return (
     // <div className='App'>
@@ -32,8 +29,7 @@ function App() {
         </Box>
 
         <Box sx={{ backgroundColor: 'rgba(0, 0, 0)', border: '4px solid rgb(21, 148, 146)', width: '55%', height: '55%', borderRadius: 'xl', mt: 5, p: 2 }}>
-          <TypeAnimation sequence={['Omid @ webDev ~%', 100, 'Omid @ devOmid ~%', 300, `Omid @ Azad ~%\n
-          ${'text'}`, 1000]}
+          <TypeAnimation sequence={['Omid @ webDev ~%', 100, 'Omid @ devOmid ~%', 300, `Omid @ Azad ~%\n`, 1000]}
             wrapper="span"
             speed={55}
             style={{ fontSize: '1.3em', display: 'inline-block', color: 'rgb(179, 179, 179)', whiteSpace: 'pre-line' }}
