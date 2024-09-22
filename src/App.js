@@ -1,84 +1,145 @@
-import { Box, colors, IconButton, Typography } from '@mui/joy';
-import { useState } from 'react';
-import CompileModal from './compileModal';
-import CodeTyping from './codeTyping';
-import { TypeAnimation } from 'react-type-animation';
-import { SvgIcon } from '@mui/joy';
-import icons from './constants/icons';
+import React, { useState, useEffect } from 'react';
+import l1 from './assets/background effect images/1.png';
+import l2 from './assets/background effect images/2.png';
+import l3 from './assets/background effect images/3.png';
+import l4 from './assets/background effect images/4.png';
+import l5 from './assets/background effect images/5.png';
+import l6 from './assets/background effect images/6.png';
+import l7 from './assets/background effect images/7.png';
+import { Box, Divider, Link, Typography } from '@mui/joy';
+import './App.css'; // Add all the necessary styling here
 
+// Main App component
 function App() {
-  const [compileModal, setCompileModal] = useState(false);
-  const screenW = document.documentElement.clientWidth;
-  const screenH = document.documentElement.clientHeight;
+  const [fadeLayers, setFadeLayers] = useState(0); // Track the scroll position for fading layers
+  const [showName, setShowName] = useState(false); // To control when the name appears
+  const [hoverMenu, setHoverMenu] = useState(false); // Control the hover state of the menu
+  const [hoverSocial, setHoverSocial] = useState(false); // Control the hover state of the menu
+  const [hoverSubMenu, setHoverSubMenu] = useState(false); // Control the hover state of the menu
+  const totalLayers = 7; // Total number of PNG layers
+
+  const images = [l1, l2, l3, l4, l5, l6, l7];
+
+  // Handle scroll event to trigger fade out of layers
+  const handleScroll = (e) => {
+    e.preventDefault(); // Prevent the default scroll behavior
+
+    const scrollDelta = e.deltaY / 100; // Normalize scroll speed to small increments
+    let newFadeLayers = fadeLayers + scrollDelta; // Adjust the scroll speed factor
+
+    // Constrain the fadeLayers value between 0 and totalLayers
+    if (newFadeLayers < 0) {
+      newFadeLayers = 0;
+    } else if (newFadeLayers > totalLayers) {
+      newFadeLayers = totalLayers;
+    }
+
+    setFadeLayers(newFadeLayers); // Control fading with scroll
+
+    // Show the name when all layers have faded
+    if (newFadeLayers >= totalLayers) {
+      setShowName(true);
+    } else {
+      setShowName(false); // Hide name if scrolled back up
+    }
+
+    // console.log(Math.floor(newFadeLayers)); // Log the rounded fadeLayer value
+  };
+
+  useEffect(() => {
+    window.addEventListener('wheel', handleScroll); // Use wheel event to handle scroll
+    return () => {
+      window.removeEventListener('wheel', handleScroll);
+    };
+  }, [fadeLayers]);
 
   return (
-    // <div className='App'>
-    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgb(0, 0, 159)', width: `${screenW}px`, height: `100vh`, }}>
-      <CompileModal open={compileModal} setOpen={setCompileModal} link={'omid'} />
-
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', height: '90%' }}>
-        <Box>
-          <Typography sx={{ color: 'rgb(179, 179, 179)' }} level='h1'>
-            Omid Azad
-          </Typography>
-        </Box>
-        <Box>
-          <Typography sx={{ color: 'rgb(179, 179, 179)' }} level='h3'>
-            Web Developer & Programmer
-          </Typography>
-        </Box>
-
-        <Box sx={{ backgroundColor: 'rgba(0, 0, 0)', border: '4px solid rgb(21, 148, 146)', width: '55%', height: '55%', borderRadius: 'xl', mt: 5, p: 2 }}>
-          <TypeAnimation sequence={['Omid @ webDev ~%', 100, 'Omid @ devOmid ~%', 300, `Omid @ Azad ~%\n`, 1000]}
-            wrapper="span"
-            speed={55}
-            style={{ fontSize: '1.3em', display: 'inline-block', color: 'rgb(179, 179, 179)', whiteSpace: 'pre-line' }}
-            repeat={0}
+    <div className="App">
+      <div className='layer'>
+        {images.map((image, index) => (
+          <img
+            key={index}
+            src={image}
+            className={`layer ${fadeLayers > index ? 'fade-out' : ''}`}
+            alt={`Layer ${index + 1}`}
           />
+        ))}
+      </div>
+
+      {showName && (
+        <div className="centered-name">
+          <h1 onMouseEnter={() => {
+            setHoverMenu(true);
+            setHoverSocial(true);
+          }}>
+            Omid Azad
+          </h1>
+
+          {hoverMenu && (
+            <div onMouseEnter={() => setHoverSubMenu(true)} className={`menu ${hoverMenu ? 'show' : ''}`}>
+              <h2>My Ups and Downs</h2>
+            </div>
+          )}
+        </div>
+      )}
+
+      {hoverSubMenu && (
+        <Box sx={{ display: 'flex', justifyContent: 'center', position: 'fixed', left: '35%', bottom: '25%' }} className={`submenu ${hoverSubMenu ? '' : 'hide'}`}>
+          <Link underline='noen' href="#who-am-i">
+            <Typography sx={{ color: 'white' }}>
+              Who am I
+            </Typography>
+          </Link>
+          <Divider orientation="vertical" />
+          <Link underline='noen' href="#what-ive-done">
+            <Typography sx={{ color: 'white' }}>
+              What I've done
+            </Typography>
+          </Link>
+          <Divider orientation="vertical" />
+          <Link underline='noen' href="#what-i-think-i-know">
+            <Typography sx={{ color: 'white' }}>
+              What I think I know
+            </Typography>
+          </Link>
         </Box>
+      )}
 
-        <Box sx={{ display: 'flex', flexDirection: 'row', width: '65%', height: '15%', pl: `${screenW / 20}px`, justifyContent: 'right', alignItems: 'flex-end', mt: `${screenH / 30}px` }}>
-          <Box sx={{ width: '16.6%' }}>
-            <IconButton onClick={() => setCompileModal(true)} >
-              <img width={screenW / 13} src={icons.linkedInOutline} />
-
-            </IconButton>
-          </Box>
-
-          <Box sx={{ width: '16.6%' }}>
-            <IconButton onClick={() => setCompileModal(true)} >
-              <img style={{ fill: 'white', color: 'red' }} width={screenW / 13} src={icons.instaOutline} />
-            </IconButton>
-          </Box>
-
-          <Box sx={{ width: '16.6%' }}>
-            <IconButton onClick={() => setCompileModal(true)} >
-              <img width={screenW / 13} src={icons.telegramOutline} />
-            </IconButton>
-          </Box>
-
-          <Box sx={{ width: '16.6%' }}>
-            <IconButton onClick={() => setCompileModal(true)} >
-              <img width={screenW / 13} src={icons.githubOutline} />
-            </IconButton>
-          </Box>
-
-          <Box sx={{ width: '16.6%' }}>
-            <IconButton onClick={() => setCompileModal(true)} >
-              <img width={screenW / 13} src={icons.gmailOutline} />
-            </IconButton>
-          </Box>
-
-          <Box sx={{ width: '16.6%' }}>
-            <IconButton onClick={() => setCompileModal(true)} >
-              <img width={screenW / 14} src={icons.phoneOutline} />
-            </IconButton>
-          </Box>
+      {showName && (
+        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <div className={`social-icons ${hoverSocial ? '' : 'hide'}`}>
+            <Link href="https://linkedin.com" target="_blank" rel="noreferrer">
+              <Typography sx={{ color: 'white' }}>
+                LinkedIn
+              </Typography>
+            </Link>
+            <Link href="https://instagram.com" target="_blank" rel="noreferrer">
+              <Typography sx={{ color: 'white' }}>
+                Instagram
+              </Typography>
+            </Link>
+            <Link href="https://telegram.org" target="_blank" rel="noreferrer">
+              <Typography sx={{ color: 'white' }}>
+                Telegram
+              </Typography>
+            </Link>
+            <Link href="https://whatsapp.com" target="_blank" rel="noreferrer">
+              <Typography sx={{ color: 'white' }}>
+                WhatsApp
+              </Typography>
+            </Link>
+            <Link href="https://github.com" target="_blank" rel="noreferrer">
+              <Typography sx={{ color: 'white' }}>
+                GitHub
+              </Typography>
+            </Link>
+          </div>
         </Box>
-      </Box>
-    </Box>
-    // </div>
+      )}
+
+    </div>
   );
 }
 
 export default App;
+
