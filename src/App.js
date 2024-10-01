@@ -39,8 +39,14 @@ function App() {
     // Show the name when all layers have faded
     if (newFadeLayers >= totalLayers) {
       setShowName(true);
+      setTimeout(() => {
+        setHoverSocial(true)
+      }, 2000);
     } else {
-      setShowName(false); // Hide name if scrolled back up
+      setShowName(false);
+      setHoverSubMenu(false);
+      setHoverMenu(false)
+      setHoverSocial(false)
     }
 
     // console.log(Math.floor(newFadeLayers)); // Log the rounded fadeLayer value
@@ -66,76 +72,83 @@ function App() {
         ))}
       </div>
 
-      {showName && (
-        <div className="centered-name">
-          <h1 onMouseEnter={() => {
-            setHoverMenu(true);
-            setHoverSocial(true);
-          }}>
-            Omid Azad
-          </h1>
+      <Box sx={{ height: '100%', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column' }} >
+        {showName && (
+        <Box sx={{ height: '75%', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column' }} >
+            <div className="centered-name">
+              <h1 onMouseEnter={() => {
+                setHoverMenu(true);
+              }}>
+                I am Omid
+              </h1>
 
-          {hoverMenu && (
-            <div onMouseEnter={() => setHoverSubMenu(true)} className={`menu ${hoverMenu ? 'show' : ''}`}>
-              <h2>My Ups and Downs</h2>
+              {hoverMenu && (
+                  <div onMouseEnter={() => setHoverSubMenu(true)} className={`menu ${hoverMenu ? 'hide' : ''}`}>
+                    <h2>My Ups and Downs</h2>
+                  </div>
+              )}
             </div>
+              </Box>
+        )}
+
+        <Box sx={{ height: '10%', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', mb: 15, }} >
+          {hoverSubMenu && (
+            <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }} className={`submenu ${hoverSubMenu ? '' : 'hide'}`}>
+              <Link sx={{ width: '25%' }} underline='noen' href="#who-am-i">
+                <Typography level='body-lg' sx={{ color: 'white', width: '100%' }}>
+                  Who am I
+                </Typography>
+              </Link>
+              <Divider orientation="vertical" />
+              <Link sx={{ width: '25%' }} underline='noen' href="#what-ive-done">
+                <Typography level='body-lg' sx={{ color: 'white', width: '100%' }}>
+                  What I've done
+                </Typography>
+              </Link>
+              <Divider orientation="vertical" />
+              <Link sx={{ width: '30%' }} underline='noen' href="#what-i-think-i-know">
+                <Typography level='body-lg' sx={{ color: 'white', width: '100%' }}>
+                  What I think I know
+                </Typography>
+              </Link>
+            </Box>
           )}
-        </div>
-      )}
-
-      {hoverSubMenu && (
-        <Box sx={{ display: 'flex', justifyContent: 'center', position: 'fixed', left: '35%', bottom: '25%' }} className={`submenu ${hoverSubMenu ? '' : 'hide'}`}>
-          <Link underline='noen' href="#who-am-i">
-            <Typography sx={{ color: 'white' }}>
-              Who am I
-            </Typography>
-          </Link>
-          <Divider orientation="vertical" />
-          <Link underline='noen' href="#what-ive-done">
-            <Typography sx={{ color: 'white' }}>
-              What I've done
-            </Typography>
-          </Link>
-          <Divider orientation="vertical" />
-          <Link underline='noen' href="#what-i-think-i-know">
-            <Typography sx={{ color: 'white' }}>
-              What I think I know
-            </Typography>
-          </Link>
         </Box>
-      )}
 
-      {showName && (
-        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <div className={`social-icons ${hoverSocial ? '' : 'hide'}`}>
-            <Link href="https://linkedin.com" target="_blank" rel="noreferrer">
-              <Typography sx={{ color: 'white' }}>
-                LinkedIn
-              </Typography>
-            </Link>
-            <Link href="https://instagram.com" target="_blank" rel="noreferrer">
-              <Typography sx={{ color: 'white' }}>
-                Instagram
-              </Typography>
-            </Link>
-            <Link href="https://telegram.org" target="_blank" rel="noreferrer">
-              <Typography sx={{ color: 'white' }}>
-                Telegram
-              </Typography>
-            </Link>
-            <Link href="https://whatsapp.com" target="_blank" rel="noreferrer">
-              <Typography sx={{ color: 'white' }}>
-                WhatsApp
-              </Typography>
-            </Link>
-            <Link href="https://github.com" target="_blank" rel="noreferrer">
-              <Typography sx={{ color: 'white' }}>
-                GitHub
-              </Typography>
-            </Link>
-          </div>
+        <Box sx={{ height: '5%', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'end', flexDirection: 'column', }} >
+          {hoverSocial && (
+            <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', mb: 5 }}>
+              <div className={`social-icons ${hoverSocial ? '' : 'hide'}`}>
+                <Link href="https://linkedin.com" target="_blank" rel="noreferrer">
+                  <Typography level='body-sm' sx={{ color: 'white' }}>
+                    LinkedIn
+                  </Typography>
+                </Link>
+                <Link href="https://instagram.com" target="_blank" rel="noreferrer">
+                  <Typography level='body-sm' sx={{ color: 'white' }}>
+                    Instagram
+                  </Typography>
+                </Link>
+                <Link href="https://telegram.org" target="_blank" rel="noreferrer">
+                  <Typography level='body-sm' sx={{ color: 'white' }}>
+                    Telegram
+                  </Typography>
+                </Link>
+                <Link href="https://whatsapp.com" target="_blank" rel="noreferrer">
+                  <Typography level='body-sm' sx={{ color: 'white' }}>
+                    WhatsApp
+                  </Typography>
+                </Link>
+                <Link href="https://github.com" target="_blank" rel="noreferrer">
+                  <Typography level='body-sm' sx={{ color: 'white' }}>
+                    GitHub
+                  </Typography>
+                </Link>
+              </div>
+            </Box>
+          )}
         </Box>
-      )}
+      </Box>
 
     </div>
   );

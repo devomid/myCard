@@ -1,26 +1,28 @@
 /* Lock the viewport so the page doesn't scroll */
 body,
 html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-    /* Prevent the page from scrolling */
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: auto;
     font-family: Arial, sans-serif;
     background-color: #333;
 }
 
 .App {
-    position: relative;
     height: 100vh;
-    /* Fix the height to the viewport */
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .layer {
     position: absolute;
     width: 100%;
     height: 100%;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .fade-out {
@@ -28,47 +30,47 @@ html {
 }
 
 .centered-name {
-    position: fixed;
+    margin-top: 25%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10;
     width: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    height: 50%;
+    flex-direction: column;
+    transform: translate(0%, 0%);
     text-align: center;
+    transition: opacity 0.5s ease-in-out;
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 5rem;
     margin: 0;
     color: white;
+    position: fixed;
 }
 
 h2{
+    font-size: 1.5rem;
     color: white;
 }
 
-.menu {
-    position: fixed;
-    top: 20;
-    left: 24%;
-    width: 50%;
-    padding: 20px;
+.menu .hide{
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
 }
 
-.menu.show {
+.menu  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 90%;
+    transition: opacity 0.3s ease-in-out;
     opacity: 1;
+    margin-top: 20;
 }
 
-/* .submenu{ 
-    position: fixed;
-    display: flex;
-    width: 100%;
-    margin-top: 400;
-    background-color: aqua;
-    margin-top: 300px;
-justify-items: center;
-} */
 .submenu a {
     font-size: 1.5rem;
     margin-right: 30px;
@@ -77,6 +79,10 @@ justify-items: center;
     text-decoration: none;
     opacity: 1;
     text-align: center;
+}
+
+.submenu{
+    opacity: 1;
 }
 
 .submenu .hide {
@@ -88,14 +94,16 @@ justify-items: center;
 }
 
 .social-icons {
-    position: fixed;
-    top: 93%;
-    left: 40%;
     opacity: 1;
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .social-icons .hide {
     opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .social-icons a {
@@ -106,5 +114,5 @@ justify-items: center;
 }
 
 .social-icons a:hover {
-    color: #007BFF;
+    color: #00ff15;
 }
