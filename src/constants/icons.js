@@ -14,13 +14,3 @@ export default {
     gmailOutline,
     phoneOutline
 }
-
-
-
-// import linkedInFilled from './assets/icons/icons8-linkedin-144.png';
-// import instaFilled from './assets/icons/icons8-instagram-144.png';
-// import telegramOutline from './assets/icons/icons8-telegram-100.png';
-// import githubFilled from './assets/icons/icons8-github-96-2.png';
-// import gmailOutline from './assets/icons/icons8-gmail-100.png';
-// import phoneOutline from './assets/icons/icons8-phone-100.png';
-// import phoneFilled from './assets/icons/icons8-phone-number-80.png'

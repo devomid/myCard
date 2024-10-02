@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import l1 from './assets/background effect images/1.png';
-import l2 from './assets/background effect images/2.png';
-import l3 from './assets/background effect images/3.png';
-import l4 from './assets/background effect images/4.png';
-import l5 from './assets/background effect images/5.png';
-import l6 from './assets/background effect images/6.png';
-import l7 from './assets/background effect images/7.png';
 import { Box, Divider, Link, Typography } from '@mui/joy';
 import './App.css'; // Add all the necessary styling here
+import images from './constants/images.js';
+
 
 // Main App component
 function App() {
@@ -16,9 +11,9 @@ function App() {
   const [hoverMenu, setHoverMenu] = useState(false); // Control the hover state of the menu
   const [hoverSocial, setHoverSocial] = useState(false); // Control the hover state of the menu
   const [hoverSubMenu, setHoverSubMenu] = useState(false); // Control the hover state of the menu
-  const totalLayers = 7; // Total number of PNG layers
+  const totalLayers = 198; // Total number of PNG layers
 
-  const images = [l1, l2, l3, l4, l5, l6, l7];
+  const imgPathes = Object.values(images);
 
   // Handle scroll event to trigger fade out of layers
   const handleScroll = (e) => {
@@ -59,10 +54,12 @@ function App() {
     };
   }, [fadeLayers]);
 
+  console.log(imgPathes);
+
   return (
     <div className="App">
       <div className='layer'>
-        {images.map((image, index) => (
+        {imgPathes.map((image, index) => (
           <img
             key={index}
             src={image}
@@ -74,7 +71,7 @@ function App() {
 
       <Box sx={{ height: '100%', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column' }} >
         {showName && (
-        <Box sx={{ height: '75%', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column' }} >
+          <Box sx={{ height: '75%', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column' }} >
             <div className="centered-name">
               <h1 onMouseEnter={() => {
                 setHoverMenu(true);
@@ -83,12 +80,12 @@ function App() {
               </h1>
 
               {hoverMenu && (
-                  <div onMouseEnter={() => setHoverSubMenu(true)} className={`menu ${hoverMenu ? 'hide' : ''}`}>
-                    <h2>My Ups and Downs</h2>
-                  </div>
+                <div onMouseEnter={() => setHoverSubMenu(true)} className={`menu ${hoverMenu ? 'hide' : ''}`}>
+                  <h2>My Ups and Downs</h2>
+                </div>
               )}
             </div>
-              </Box>
+          </Box>
         )}
 
         <Box sx={{ height: '10%', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', mb: 15, }} >
@@ -155,4 +152,3 @@ function App() {
 }
 
 export default App;
-
