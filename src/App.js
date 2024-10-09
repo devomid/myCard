@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Box, Divider, Link, Typography } from '@mui/joy';
 import './App.css'; // Add all the necessary styling here
 import images from './constants/images.js';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
+
 
 
 // Main App component
@@ -12,6 +17,8 @@ function App() {
   const [hoverSocial, setHoverSocial] = useState(false); // Control the hover state of the menu
   const [hoverSubMenu, setHoverSubMenu] = useState(false); // Control the hover state of the menu
   const totalLayers = 198; // Total number of PNG layers
+  const [init, setInit] = useState(false);
+
 
   const imgPathes = Object.values(images);
 
@@ -20,7 +27,7 @@ function App() {
     e.preventDefault(); // Prevent the default scroll behavior
 
     const scrollDelta = e.deltaY / 100; // Normalize scroll speed to small increments
-    let newFadeLayers = fadeLayers + scrollDelta; // Adjust the scroll speed factor
+    let newFadeLayers = fadeLayers + scrollDelta + 9; // Adjust the scroll speed factor
 
     // Constrain the fadeLayers value between 0 and totalLayers
     if (newFadeLayers < 0) {
@@ -56,6 +63,19 @@ function App() {
 
   console.log(imgPathes);
 
+  useEffect(() => {
+    Aos.init();
+
+    initParticlesEngine(async (engine) => {
+      await loadSlim(engine);
+    }).then(() => {
+      setInit(true);
+    });
+
+  }, [])
+
+
+
   return (
     <div className="App">
       <div className='layer'>
@@ -70,82 +90,103 @@ function App() {
       </div>
 
       <Box sx={{ height: '100%', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column' }} >
-        {showName && (
-          <Box sx={{ height: '75%', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column' }} >
-            <div className="centered-name">
-              <h1 onMouseEnter={() => {
-                setHoverMenu(true);
-              }}>
-                I am Omid
-              </h1>
 
-              {hoverMenu && (
-                <div onMouseEnter={() => setHoverSubMenu(true)} className={`menu ${hoverMenu ? 'hide' : ''}`}>
-                  <h2>My Ups and Downs</h2>
-                </div>
-              )}
+        {showName && (
+          <Box sx={{ height: '10%', width: '35vw', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row', marginTop: '35vh', position: 'fixed' }} >
+            <div onMouseOver={() => {
+              setHoverMenu(true);
+            }} onMouseEnter={() => {
+              setHoverMenu(true);
+            }} style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', padding: 10 }}>
+              <Typography fontFamily={'MyFont'} sx={{ color: 'white' }} fontSize={90} level='h1' component={'h1'} data-aos="fade-down"
+                data-aos-easing="linear"
+                data-aos-duration="900">
+                I
+              </Typography>
+              <Typography fontFamily={'MyFont'} sx={{ color: 'white' }} fontSize={90} level='h1' component={'h1'} data-aos="fade-down"
+                data-aos-easing="linear"
+                data-aos-duration="1400">
+                am
+              </Typography>
+              <Typography fontFamily={'MyFont'} sx={{ color: 'white' }} fontSize={90} level='h1' component={'h1'} data-aos="fade-down"
+                data-aos-easing="linear"
+                data-aos-duration="1900">
+                Omid
+              </Typography>
             </div>
           </Box>
         )}
 
-        <Box sx={{ height: '10%', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', mb: 15, }} >
-          {hoverSubMenu && (
-            <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }} className={`submenu ${hoverSubMenu ? '' : 'hide'}`}>
-              <Link sx={{ width: '25%' }} underline='noen' href="#who-am-i">
-                <Typography level='body-lg' sx={{ color: 'white', width: '100%' }}>
-                  Who am I
-                </Typography>
-              </Link>
-              <Divider orientation="vertical" />
-              <Link sx={{ width: '25%' }} underline='noen' href="#what-ive-done">
-                <Typography level='body-lg' sx={{ color: 'white', width: '100%' }}>
-                  What I've done
-                </Typography>
-              </Link>
-              <Divider orientation="vertical" />
-              <Link sx={{ width: '30%' }} underline='noen' href="#what-i-think-i-know">
-                <Typography level='body-lg' sx={{ color: 'white', width: '100%' }}>
-                  What I think I know
-                </Typography>
-              </Link>
-            </Box>
+        <Box sx={{ height: '75%', width: '33vw', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'row', marginTop: '20vh', position: 'fixed' }} >
+          {hoverMenu && (
+            <div onMouseEnter={() => setHoverSubMenu(true)}>
+              <Typography sx={{ color: 'white' }} fontFamily={'MyFont1'} fontSize={30} component={'h6'} data-aos="fade-up" data-aos-duration="2000">My Ups and Downs</Typography>
+            </div>
           )}
         </Box>
 
-        <Box sx={{ height: '5%', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'end', flexDirection: 'column', }} >
-          {hoverSocial && (
-            <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', mb: 5 }}>
-              <div className={`social-icons ${hoverSocial ? '' : 'hide'}`}>
-                <Link href="https://linkedin.com" target="_blank" rel="noreferrer">
-                  <Typography level='body-sm' sx={{ color: 'white' }}>
-                    LinkedIn
-                  </Typography>
-                </Link>
-                <Link href="https://instagram.com" target="_blank" rel="noreferrer">
-                  <Typography level='body-sm' sx={{ color: 'white' }}>
-                    Instagram
-                  </Typography>
-                </Link>
-                <Link href="https://telegram.org" target="_blank" rel="noreferrer">
-                  <Typography level='body-sm' sx={{ color: 'white' }}>
-                    Telegram
-                  </Typography>
-                </Link>
-                <Link href="https://whatsapp.com" target="_blank" rel="noreferrer">
-                  <Typography level='body-sm' sx={{ color: 'white' }}>
-                    WhatsApp
-                  </Typography>
-                </Link>
-                <Link href="https://github.com" target="_blank" rel="noreferrer">
-                  <Typography level='body-sm' sx={{ color: 'white' }}>
-                    GitHub
-                  </Typography>
-                </Link>
-              </div>
-            </Box>
-          )}
-        </Box>
+        {/* <Box sx={{ height: '10%', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', position: 'fixed', bgcolor:'red' }} > */}
+        {hoverSubMenu && (
+          <Box component={'div'} data-aos="fade-up" sx={{ width: '90%', display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', height: '15%', marginTop: '68vh' }} >
+            <Link underline='noen' href="#who-am-i">
+              <Typography fontFamily={'MyFont'} fontSize={30} component={'body'} data-aos="fade-down"
+                data-aos-easing="linear"
+                data-aos-duration="900" level='body-lg' sx={{ color: 'white', width: '100%' }}>
+                Who am I
+              </Typography>
+            </Link>
+            <Divider orientation="vertical" />
+            <Link underline='noen' href="#what-ive-done">
+              <Typography fontFamily={'MyFont'} fontSize={30} component={'body'} data-aos="fade-down"
+                data-aos-easing="linear"
+                data-aos-duration="1400" level='body-lg' sx={{ color: 'white', width: '100%' }}>
+                What I've done
+              </Typography>
+            </Link>
+            <Divider orientation="vertical" />
+            <Link underline='noen' href="#what-i-think-i-know">
+              <Typography fontFamily={'MyFont'} fontSize={30} component={'body'} data-aos="fade-down"
+                data-aos-easing="linear"
+                data-aos-duration="1900" level='body-lg' sx={{ color: 'white', width: '100%' }}>
+                What I think I know
+              </Typography>
+            </Link>
+          </Box>
+        )}
+        {/* </Box> */}
+
+        {/* <Box sx={{ height: '5%', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'end', flexDirection: 'column', }} > */}
+        {hoverSocial && (
+          <Box sx={{ width: '70%', display: 'flex', justifyContent: 'space-around', alignItems: 'center', mb: 3, position: 'fixed', bottom: 0 }}>
+            <Link href="https://www.linkedin.com/in/devomid" target="_blank" rel="noreferrer">
+              <Typography fontFamily={'MyFont'} fontSize={18} component={'body'} data-aos="fade-up" data-aos-duration="200" level='body-sm' sx={{ color: 'white' }}>
+                LinkedIn
+              </Typography>
+            </Link>
+            <Link href="https://www.instagram.com/o.a.m.z.i.a?igsh=MTBoMnNrZXhsNHk5Yg%3D%3D&utm_source=qr" target="_blank" rel="noreferrer">
+              <Typography fontFamily={'MyFont'} fontSize={18} component={'body'} data-aos="fade-up" data-aos-duration="600" level='body-sm' sx={{ color: 'white' }}>
+                Instagram
+              </Typography>
+            </Link>
+            <Link href="https://t.me/Omid12011" target="_blank" rel="noreferrer">
+              <Typography fontFamily={'MyFont'} fontSize={18} component={'body'} data-aos="fade-up" data-aos-duration="1000" level='body-sm' sx={{ color: 'white' }}>
+                Telegram
+              </Typography>
+            </Link>
+            <Link href="https://wa.me/+989393122696" target="_blank" rel="noreferrer">
+              <Typography fontFamily={'MyFont'} fontSize={18} component={'body'} data-aos="fade-up" data-aos-duration="1400" level='body-sm' sx={{ color: 'white' }}>
+                WhatsApp
+              </Typography>
+            </Link>
+            <Link href="https://github.com/devomid" target="_blank" rel="noreferrer">
+              <Typography fontFamily={'MyFont'} fontSize={18} component={'body'} data-aos="fade-up" data-aos-duration="1800" level='body-sm' sx={{ color: 'white' }}>
+                GitHub
+              </Typography>
+            </Link>
+          </Box>
+        )}
       </Box>
+      {/* </Box> */}
 
     </div>
   );
